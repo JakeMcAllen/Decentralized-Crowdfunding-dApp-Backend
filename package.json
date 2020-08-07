@@ -4,9 +4,11 @@
   "description": "A starter boilerplate for an Ethereum backend using Truffle, Infura, OpenZeppelin Contracts, Chai and, Ganache.",
   "main": "index.js",
   "scripts": {
+    "tsc": "./node_modules/typescript/bin/tsc -w -p .",
     "ganache": "ganache-cli -a \"$(grep ACCOUNT_NUMBER .env | cut -d '=' -f2)\" -d -m \"$(grep DEV_MNEMONIC .env | cut -d '=' -f2)\"",
     "compile": "rm -fr build && truffle compile",
     "deploy-dev": "truffle deploy --network development",
+    "script-dev": "truffle exec ./dist/scripts/dummy.js --network development",
     "test-dev": "truffle test --network development"
   },
   "repository": {
