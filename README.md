@@ -37,6 +37,7 @@ A DApp can have frontend code and user interfaces written in any language (e.g.,
 * [OpenZeppelin Contracts](https://openzeppelin.com/contracts/): This is a set of Smart Contracts standard libraries that help you minimize development risk for Ethereum and other blockchains. It includes the most used implementations of ERC standards (e.g., ERC20, ERC721, etc.).
 * [OpenZeppelin TestHelpers](https://docs.openzeppelin.com/test-helpers/0.5/): Assertion library for Ethereum smart contract testing. It can be used to verify events, track balance changes, handle large numbers, check the transaction reverts, and much more.
 * [Chai](https://www.chaijs.com/): Chai is a BDD / TDD assertion library for node and the browser written in JS. We will use the Should interface for testing purposes.
+* [ESLint](https://eslint.org/): ESLint statically analyzes the JavaScript code to quickly find problems and fix some of them automatically.
 
 ## Getting Started
 
@@ -59,6 +60,18 @@ Install node packages through npm.
 ```bash
 cd Ethereum-Backend-Boilerplate
 npm install
+```
+
+Use ESLint to check the syntax and style of your JavaScript code.
+
+```bash
+npm run lint-js
+```
+
+Use SolHint to check the syntax and style of your Solidity code.
+
+```bash
+npm run lint-sol
 ```
 
 The npm scripts allow you to run a local development environment using Ganache or a remote development environment using the Ethereum Ropsten testnet. The scripts followed by `-dev` (e.g., `deploy-dev`) are used for the local usage, the other ones followed by `-net` (e.g., `deploy-net`) are used for the remote usage. The setup of the `.env` file change based on the environment.

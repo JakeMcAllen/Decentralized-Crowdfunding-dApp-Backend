@@ -4,13 +4,15 @@
   "description": "A starter boilerplate for an Ethereum backend using Truffle, Infura, OpenZeppelin Contracts, Chai and, Ganache.",
   "scripts": {
     "ganache": "ganache-cli -a \"$(grep ACCOUNT_NUMBER .env | cut -d '=' -f2)\" -d -m \"$(grep DEV_MNEMONIC .env | cut -d '=' -f2)\"",
-    "compile": "rm -fr build && truffle compile",
+    "compile": "rm -fr build && solhint ./contracts/* --fix && truffle compile",
     "deploy-dev": "truffle deploy --network development",
     "deploy-net": "truffle deploy --network ropsten",
     "script-dev": "truffle exec ./scripts/script.js --network development",
     "script-net": "truffle exec ./scripts/script.js --network ropsten",
     "test-dev": "truffle test --network development",
-    "test-net": "truffle test --network ropsten"
+    "test-net": "truffle test --network ropsten",
+    "lint-js": "eslint . --fix",
+    "lint-sol": "solhint ./contracts/* --fix"
   },
   "repository": {
     "type": "git",
@@ -27,7 +29,14 @@
     "@openzeppelin/test-helpers": "^0.5.6",
     "chai": "^4.2.0",
     "dotenv": "^8.2.0",
+    "eslint": "^7.7.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
     "ganache-cli": "^6.10.1",
+    "solhint": "^3.2.0",
     "truffle": "^5.1.41"
   },
   "dependencies": {
