@@ -9,8 +9,7 @@
     "deploy-net": "truffle deploy --network ropsten",
     "script-dev": "truffle exec ./scripts/script.js --network development",
     "script-net": "truffle exec ./scripts/script.js --network ropsten",
-    "test-dev": "truffle test --network development",
-    "test-net": "truffle test --network ropsten",
+    "test": "truffle test --network development",
     "lint-js": "eslint . --fix",
     "lint-sol": "solhint ./contracts/* --fix"
   },
