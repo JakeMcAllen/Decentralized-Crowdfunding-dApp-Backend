@@ -38,19 +38,19 @@ contract Project {
     
     /// @dev Check if the project status is fundraising.
     modifier onlyFundraising() {
-        require(status == STATUS.FUNDRAISING, "Project doesn't have a fundraising status");
+        require(status == STATUS.FUNDRAISING, "no-fundraising-status");
         _;
     }
     
     /// @dev Check if the project status is expired.
     modifier onlyExpired() {
-        require(status == STATUS.EXPIRED, "Project doesn't have an expired status");
+        require(status == STATUS.EXPIRED, "no-expired-status");
         _;
     }
     
     /// @dev Check if the project status is successful.
     modifier onlySuccessful() {
-        require(status == STATUS.SUCCESSFUL, "Project doesn't have a successful status");
+        require(status == STATUS.SUCCESSFUL, "no-succesful-status");
         _;
     }
 
@@ -71,8 +71,8 @@ contract Project {
     /// @notice Fund the project with a certain amount of wei.
     /// @dev Sum the amount of wei specified into tx msg.value.
     function contribute() external payable onlyFundraising() {
-        require(msg.sender != starter, "You cannot fund your project!");
-        require(msg.value > 0, "You cannot send funds to your project!");
+        require(msg.sender != starter, "contribution-from-starter");
+        require(msg.value > 0, "zero-contribution");
                 
         // Storage update.
         contributions[msg.sender] = contributions[msg.sender].add(msg.value); // Store the contribute.
@@ -82,12 +82,12 @@ contract Project {
         emit FundingReceived(msg.sender, msg.value, raisedFunds);
 
         // Update the project status if the goal is reached.
-        _checkIfGoalAmountIsReached();
+        _checkIfGoalAmountOrDeadlineAreReached();
     }
 
-        /// @dev Returns the contribution to the caller if the deadline expires and the goal hasn't been reached.
+    /// @dev Returns the contribution to the caller if the deadline expires and the goal hasn't been reached.
     function refundMe() external payable onlyExpired() {
-        require(contributions[msg.sender] > 0, "You didn't contribute to this project!");
+        require(contributions[msg.sender] > 0, "no-contribution");
 
         // Subtract the contribution from the raised funds.
         uint256 amountToRefund = contributions[msg.sender];
@@ -97,11 +97,11 @@ contract Project {
         emit ContributorRefunded(msg.sender);
         
         // Refund the contributor.
-        require(msg.sender.send(contributions[msg.sender]), "Cannot refund the contributor!");
+        require(msg.sender.send(contributions[msg.sender]), "not-refund-contributor");
     }
 
     /// @dev Change the project status based on goal reached and deadline expired conditions.
-    function _checkIfGoalAmountIsReached() internal {
+    function _checkIfGoalAmountOrDeadlineAreReached() internal {
         // The project reached the deadline without achieving the goal.
         if (now > deadline)  {
             status = STATUS.EXPIRED;
@@ -120,6 +120,6 @@ contract Project {
         emit StarterPaid(starter);
         
         // Pay the project starter.
-        require(starter.send(raisedFunds), "Cannot pay the starter!");
+        require(starter.send(raisedFunds), "not-pay-starter");
     }
 }

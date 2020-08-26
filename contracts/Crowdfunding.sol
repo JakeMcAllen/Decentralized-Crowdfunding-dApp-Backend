@@ -31,32 +31,32 @@ contract Crowdfunding {
 
     /** @notice Start a new Project.
       * @dev Creates a new Project Smart Contract initialized with the provided data.
-      * @param name Name of the project to be created.
-      * @param description Short description about the project.
-      * @param durationInDays Project deadline in days.
-      * @param amountToRaise Project goal in wei.
+      * @param _name Name of the project to be created.
+      * @param _description Short description about the project.
+      * @param _durationInDays Project deadline in days.
+      * @param _amountToRaise Project goal in wei.
       */
     function startProject(
-        string calldata name,
-        string calldata description,
-        uint durationInDays,
-        uint amountToRaise
+        string calldata _name,
+        string calldata _description,
+        uint _durationInDays,
+        uint _amountToRaise
     ) external {
         // Compute the deadline timestamp adding the duration in days to current block timestamp (now).
-        uint deadline = now.add(durationInDays.mul(1 days));
+        uint deadline = now.add(_durationInDays.mul(1 days));
         
         // Create a new Project SC.
-        Project newProject = new Project(name, description, deadline, amountToRaise, msg.sender);
+        Project newProject = new Project(_name, _description, deadline, _amountToRaise, msg.sender);
         
         // Storage update.
         _projects.push(newProject);
         
         // Emit event.
         emit ProjectStarted(
-            name,
-            description,
+            _name,
+            _description,
             deadline,
-            amountToRaise,
+            _amountToRaise,
             address(newProject),
             msg.sender
         );
