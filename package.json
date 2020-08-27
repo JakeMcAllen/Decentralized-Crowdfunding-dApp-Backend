@@ -7,8 +7,8 @@
     "compile": "rm -fr build && solhint ./contracts/* --fix && truffle compile",
     "deploy-dev": "truffle deploy --network development",
     "deploy-net": "truffle deploy --network ropsten",
-    "script-dev": "truffle exec ./scripts/script.js --network development",
-    "script-net": "truffle exec ./scripts/script.js --network ropsten",
+    "script-dev": "truffle exec scripts/createProjects.mock.js --network development",
+    "script-net": "truffle exec scripts/createProjects.mock.js --network ropsten",
     "test": "truffle test --network development",
     "lint-js": "eslint . --fix",
     "lint-sol": "solhint ./contracts/* --fix"
@@ -27,6 +27,7 @@
   "devDependencies": {
     "@openzeppelin/test-helpers": "^0.5.6",
     "chai": "^4.2.0",
+    "colors": "^1.4.0",
     "dotenv": "^8.2.0",
     "eslint": "^7.7.0",
     "eslint-config-standard": "^14.1.1",
