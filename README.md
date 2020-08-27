@@ -55,7 +55,7 @@ Deploy the Smart Contract on Ropsten testnet.
 npm run deploy-net
 ```
 
-You can run a script example to deploy and populate a Crowdfunding Smart Contract creating three different Project Smart Contracts. (NB. in that case you'll need to add more founders ropsten accounts).
+You can run a script example to deploy and populate a Crowdfunding Smart Contract creating three different Project Smart Contracts. This may take a while, so to speed up the process increase the *gasPrice* value! (NB. in that case you'll need to add more founders ropsten accounts).
 
 ```bash
 npm run script-net

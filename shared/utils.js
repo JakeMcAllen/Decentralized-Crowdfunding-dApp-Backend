@@ -19,8 +19,8 @@ class SharedUtils {
 
     // The parameters used when sending a transaction.
     this._transactionParameters = {
-      gas: (await web3.eth.getBlock('latest')).gasLimit, // Current gas limit.
-      gasPrice: await web3.eth.getGasPrice(), // Current gas price.
+      gas: (await web3.eth.getBlock('latest')).gasLimit, // Current median gas limit.
+      gasPrice: Number(await web3.eth.net.getNetworkType()), // Current gas price.
       data: '', // Data to sign (default null).
       from: this.accounts[0], // Default account (NB. use only for getters, override when sending txs).
     }
@@ -58,7 +58,7 @@ class SharedUtils {
       data: this._crowdfunding.getBytecode(),
     }).send({
       ...this._transactionParameters,
-      from: this.accounts[0],
+      from: this.accounts[0]
     })
   }
 

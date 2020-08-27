@@ -46,6 +46,7 @@ module.exports = {
       host: '127.0.0.1', // Localhost (default: none)
       port: 8545, // Standard Ethereum port (default: none)
       network_id: '*', // Any network (default: none)
+      gasPrice: 100000000000, // 100 Gwei (100 Shannon)
     },
 
     // Another network with more advanced options...
@@ -63,10 +64,11 @@ module.exports = {
     ropsten: {
       provider: () => new HDWalletProvider(process.env.NET_MNEMONIC, `https://ropsten.infura.io/v3/${process.env.INFURA_PROJECT_ID}`),
       network_id: 3, // Ropsten's id
-      gas: 5500000, // Ropsten has a lower block limit than mainnet
-      confirmations: 2, // # of confs to wait between deployments. (default: 0)
+      gas: 8000000, // Ropsten has a lower block limit than mainnet
+      gasPrice: 100000000000, // 100 Gwei (100 Shannon)
+      confirmations: 5, // # of confs to wait between deployments. (default: 0)
       timeoutBlocks: 200, // # of blocks before a deployment times out  (minimum/default: 50)
-      skipDryRun: true, // Skip dry run before migrations? (default: false for public nets )
+      skipDryRun: false, // Skip dry run before migrations? (default: false for public nets )
     },
 
     // Usage -> private networks

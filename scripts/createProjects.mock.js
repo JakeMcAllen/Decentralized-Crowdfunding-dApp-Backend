@@ -15,6 +15,8 @@ async function main () {
 
   // Get a new Crowdfunding SC instance.
   this.crowdfundingInstance = await SharedUtils.createNewCrowdfundingInstance()
+  console.log(`\n${colors.green('Crowdfunding SC Address')} -> (${colors.magenta(this.crowdfundingInstance._address)})`)
+  console.log(`\n${colors.white('-------------------------------------------------------------------')}`)
 
   // Create a new Project for each mocked project data.
   for (let i = 0; i < mockedProjects.length; i++) {
@@ -28,6 +30,7 @@ async function main () {
       mockedProject.amountToRaise,
     ).send({
       ...this.transactionParameters,
+      // from: (await web3.eth.getAccounts())[0], // Uncomment to deploy from the same account!
       from: (await web3.eth.getAccounts())[i + 1], // from account 1 to 3.
     })
 
@@ -41,6 +44,7 @@ async function main () {
     console.log(`\n${colors.blue('Goal')}: "${colors.yellow(mockedProject.amountToRaise)}"`)
     console.log(`\n${colors.white('-------------------------------------------------------------------')}`)
   }
+  console.log(`\n${colors.red('Everything is fine.')}`)
 
   return true
 }
