@@ -1,5 +1,5 @@
 require('dotenv').config()
-const Web3 = require('web3')
+require('web3')
 
 async function main () {
   // A web3 provider comes from truffle.
@@ -8,11 +8,9 @@ async function main () {
   if (!web3) {
     throw Error('Something went wrong with the web3 provider. Did you have run the command using truffle exec?')
   }
-
-  // Initialize Web3 instance with the truffle provider.
-  const web3Instance = new Web3(web3.currentProvider)
-
+  
   // Your script code here.
+  console.log(web3.version)
 }
 
 // Required by `truffle exec`
