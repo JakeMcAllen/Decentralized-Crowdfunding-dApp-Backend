@@ -17,9 +17,9 @@ class TestUtils {
     // specific purposes during tests.
     this._accounts = {
       crowdfundingDeployer: accounts[0],
-      starterProjectA: accounts[1],
-      starterProjectB: accounts[2],
-      starterProjectC: accounts[3],
+      founderProjectA: accounts[1],
+      founderProjectB: accounts[2],
+      founderProjectC: accounts[3],
       contributor1: accounts[4],
       contributor2: accounts[5],
       contributor3: accounts[6],
@@ -75,21 +75,29 @@ class TestUtils {
   * @param {string} description Project description.
   * @param {number} durationInDays Project crowdfunding expiration days.
   * @param {number} amountToRaise Project goal amount in wei.
-  * @param {string} starter EOA of the user who start the project.
+  * @param {string} founder EOA of the user who start the project.
   * @returns {string}
   */
-  async createNewProjectInstance (name, description, durationInDays, amountToRaise, starter) {
+  async createNewProjectInstance (name, description, durationInDays, amountToRaise, founder) {
     // Create the Project smart contract to deploy.
     const projectSC = new web3.eth.Contract(this._project.getABI())
 
     // Deploy and get the Project SC instance.
     return await projectSC.deploy({
       data: this._project.getBytecode(),
-      arguments: [name, description, durationInDays, amountToRaise, starter],
+      arguments: [name, description, durationInDays, amountToRaise, founder],
     }).send({
       ...this._transactionParameters,
-      from: starter,
+      from: founder,
     })
+  }
+
+  /**
+  * Return a list account addresses.
+  * @returns {string[]}
+  */
+  getAccounts () {
+    return this._accounts
   }
 
   /**
