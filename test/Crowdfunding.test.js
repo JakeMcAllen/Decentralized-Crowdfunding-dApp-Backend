@@ -1,27 +1,27 @@
 require('dotenv').config()
-const Web3 = require('web3')
-// Import our test utilities.
-const testUtils = require('./utils')
+require('web3')
+// Import our utilities.
+const SharedUtils = require('../shared/utils')
 // Import Chai expect interface.
 const { expect } = require('chai')
 
 // Crowdfunding contract tests.
 contract('Crowdfunding', () => {
   before(async function () {
-    // Initialize test utilities class.
-    await testUtils.init()
+    // Initialize utilities class.
+    await SharedUtils.init(web3)
 
     // Get the default transaction parameters.
-    this.transactionParameters = testUtils.getTransactionParameters()
+    this.transactionParameters = SharedUtils.getTransactionParameters()
 
     // Get a new Crowdfunding SC instance.
-    this.crowdfundingInstance = await testUtils.createNewCrowdfundingInstance()
+    this.crowdfundingInstance = await SharedUtils.createNewCrowdfundingInstance()
   })
 
   describe('# Initialization', function () {
     it('[1] Should return an empty array of projects', async function () {
       const expectedEmptyArray = await this.crowdfundingInstance.methods.getAllProjects().call({
-        from: testUtils.getAccounts().crowdfundingDeployer,
+        from: SharedUtils.getTestAccounts().crowdfundingDeployer,
       })
 
       expect(expectedEmptyArray).to.be.empty
@@ -44,13 +44,13 @@ contract('Crowdfunding', () => {
         amountToRaise,
       ).send({
         ...this.transactionParameters,
-        from: testUtils.getAccounts().founderProjectA,
+        from: SharedUtils.getTestAccounts().founderProjectA,
       })
 
       // Check Project SC instance.
       const projectAddress = transactionReceipt.events.ProjectStarted.returnValues.projectAddress
       const expectedProjectsArray = await this.crowdfundingInstance.methods.getAllProjects().call({
-        from: testUtils.getAccounts().crowdfundingDeployer,
+        from: SharedUtils.getTestAccounts().crowdfundingDeployer,
       })
 
       // Checks.
