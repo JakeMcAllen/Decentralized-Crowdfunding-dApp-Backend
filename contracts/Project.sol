@@ -14,12 +14,12 @@ contract Project {
     event FundingReceived(address contributor, uint amount, uint currentRaisedFunds);
     // Event that will be emitted whenever a contributor is refunded with his contribution.
     event ContributorRefunded(address contributor);
-    // Event that will be emitted whenever the project starter has received the raised funds.
-    event StarterPaid(address starter);
+    // Event that will be emitted whenever the project founder has received the raised funds.
+    event FounderPaid(address founder);
     
     /** Storage */
     /// @dev The possible values for the status of the project (0 = )
-    enum STATUS {FUNDRAISING, EXPIRED, SUCCESSFUL}  // FUNDRAISING = 0 default value.
+    enum STATUS {FUNDRAISING, SUCCESSFUL, EXPIRED}  // FUNDRAISING = 0 default value.
 
     string public name;
     string public description;
@@ -27,7 +27,7 @@ contract Project {
     uint public deadline; 
     uint public completeAt;
     uint256 public raisedFunds; // The sum of funds raised for the project.
-    address payable public starter; // Who starts the project.
+    address payable public founder; // Who starts the project.
 
     STATUS public status;
 
@@ -59,19 +59,19 @@ contract Project {
         string memory _description,
         uint256 _deadline,
         uint256 _amountGoal,
-        address payable _starter
+        address payable _founder
     ) public {
         name = _name;
         description = _description;
         amountGoal = _amountGoal;
         deadline = _deadline;
-        starter = _starter;
+        founder = _founder;
     }
 
     /// @notice Fund the project with a certain amount of wei.
     /// @dev Sum the amount of wei specified into tx msg.value.
     function contribute() external payable onlyFundraising() {
-        require(msg.sender != starter, "contribution-from-starter");
+        require(msg.sender != founder, "contribution-from-founder");
         require(msg.value > 0, "zero-contribution");
                 
         // Storage update.
@@ -89,15 +89,16 @@ contract Project {
     function refundMe() external payable onlyExpired() {
         require(contributions[msg.sender] > 0, "no-contribution");
 
-        // Subtract the contribution from the raised funds.
+        // Subtract the contribution.
         uint256 amountToRefund = contributions[msg.sender];
+        contributions[msg.sender] -= amountToRefund;
         raisedFunds = raisedFunds.sub(amountToRefund);
 
         // Emit event.
         emit ContributorRefunded(msg.sender);
         
         // Refund the contributor.
-        require(msg.sender.send(contributions[msg.sender]), "not-refund-contributor");
+        require(msg.sender.send(amountToRefund), "not-refund-contributor");
     }
 
     /// @dev Change the project status based on goal reached and deadline expired conditions.
@@ -109,17 +110,21 @@ contract Project {
           if (raisedFunds >= amountGoal) {
             // The project reached the goal.
             status = STATUS.SUCCESSFUL; // Change the status to successful.
-            _payStarter(); // Pay the project starter.
+            _payFounder(); // Pay the project founder.
             completeAt = now; // Set the completion time.
         } 
     }
 
-    /// @dev Function to give the received funds to the project starter.
-    function _payStarter() internal onlySuccessful() {
+    /// @dev Function to give the received funds to the project founder.
+    function _payFounder() internal onlySuccessful() {
         // Emit event.
-        emit StarterPaid(starter);
+        emit FounderPaid(founder);
         
-        // Pay the project starter.
-        require(starter.send(raisedFunds), "not-pay-starter");
+        // Subtract the funds.
+        uint256 amountToPay = raisedFunds;
+        raisedFunds = 0;
+        
+        // Pay the project founder.
+        require(founder.send(amountToPay), "founder-not-paid");
     }
 }
