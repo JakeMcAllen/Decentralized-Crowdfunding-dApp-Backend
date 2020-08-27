@@ -1,7 +1,7 @@
 # Ethereum Backend Boilerplate
-This starter repository can be used for building decentralized applications (dApp) on top of the Ethereum blockchain technology stack. It combines the latest bleeding-edge Ethereum development technologies and tools to accelerate the coding process with a modern and general approach.
+This starter repository can be used for building decentralized applications (dApp) on top of the Ethereum blockchain technology stack. It combines the latest *bleeding-edge* Ethereum development technologies and tools to accelerate the coding process with a modern and general approach.
 
-You can also find an example of a dApp built using this boilerplate (branch `example`).
+You can also find an example of a dApp built using this boilerplate on branch `example`.
 
 ## Table of Contents
 - [Ethereum dApp](#ethereum-dapp)
@@ -16,7 +16,7 @@ You can also find an example of a dApp built using this boilerplate (branch `exa
 - [License](#license)
 
 ## Ethereum dApp
-*DApp* (or *dApp*) is an abbreviated form for Decentralized Application. A dApp has its backend code running on a decentralized peer-to-peer network (e.g., Ethereum Blockchain). Contrast this with an app where the backend code runs on centralized servers (e.g., AWS, Node).
+*DApp* (or *dApp*) is an abbreviated form for Decentralized Application. A dApp has its backend code running on a decentralized peer-to-peer network (e.g., Ethereum Blockchain). This is in contrast with an app where the backend code runs on centralized servers (e.g., AWS, Node).
 
 A DApp can have frontend code and user interfaces written in any language (e.g., React) that can make calls to its back end directly through RPC calls. Furthermore, its frontend can be hosted on decentralized storage (e.g., Swarm, IPFS).
 
@@ -27,7 +27,8 @@ A DApp can have frontend code and user interfaces written in any language (e.g.,
 * **`migrations`**: Truffle uses a migration system to manage smart contract deployments. Migration is an additional particular smart contract that keeps track of changes. The Truffle configuration file is located inside the main project folder. 
 * **`mocks`**: Contains the raw data necessary for Smart Contract storage initialization or testing (e.g., information about users or relevant object). The necessity of mocked data depends on the business logic of the Smart Contract itself. The raw data must be written in JSON format.
 * **`scripts`**: Contains one or more JavaScript files used to call Smart Contract functionalities after the deploy phase. They can be used in combination with mock data to populate and execute Smart Contract logic.
-* **`test`**: Contains every Smart Contracts functionality test. The tests are written in JavaScript and performed using Chai.
+* **`test`**: Contains every Smart Contracts functionality test. The tests are written in JavaScript and performed using Chai and some helpers from OpenZeppelin Test Helper library.
+* **`shared`**: Contains a custom and extensible class used for retrieve data and instantiate your contracts on-fly.
 
 ### Tools
 * [web3js](https://github.com/ethereum/web3.js/): This is the Ethereum JavaScript API, which connects to the Generic JSON-RPC spec (offered by Ethereum node clients, like Geth) use to communicate with the blockchain nodes (i.e., call Smart Contracts methods, etc.). You need to run a local or remote Ethereum node to use this library. The backend is configured for both usages. 
@@ -35,8 +36,8 @@ A DApp can have frontend code and user interfaces written in any language (e.g.,
 * [Truffle](https://github.com/trufflesuite/truffle): A world-class development environment, testing framework, and asset pipeline for blockchains using the Ethereum Virtual Machine (EVM), aiming to make life as a developer easier. It enables us to do the Smart Contract deploy, test, and so on!
 * [Ganache](https://github.com/trufflesuite/ganache): A personal blockchain for Ethereum development you can use to deploy contracts, develop your applications, and run tests. It is available as both a desktop application and a command-line tool (formerly known as the TestRPC). Ganache is available for Windows, Mac, and Linux.
 * [OpenZeppelin Contracts](https://openzeppelin.com/contracts/): This is a set of Smart Contracts standard libraries that help you minimize development risk for Ethereum and other blockchains. It includes the most used implementations of ERC standards (e.g., ERC20, ERC721, etc.).
-* [OpenZeppelin TestHelpers](https://docs.openzeppelin.com/test-helpers/0.5/): Assertion library for Ethereum smart contract testing. It can be used to verify events, track balance changes, handle large numbers, check the transaction reverts, and much more.
-* [Chai](https://www.chaijs.com/): Chai is a BDD / TDD assertion library for node and the browser written in JS. We will use the Should interface for testing purposes.
+* [OpenZeppelin TestHelpers](https://docs.openzeppelin.com/test-helpers/0.5/): Assertion library for Ethereum smart contract testing. It can verify events, track balance changes, handle large numbers, check the transaction reverts, and much more.
+* [Chai](https://www.chaijs.com/): Chai is a BDD / TDD assertion library for node and the browser written in JS. We will use the *Expect* interface for testing purposes.
 * [ESLint](https://eslint.org/): ESLint statically analyzes the JavaScript code to quickly find problems and fix some of them automatically.
 
 ## Getting Started
@@ -91,19 +92,19 @@ To compile your Solidity Smart Contracts, run the following script. It will crea
 npm run compile
 ```
 
-To deploy locally on Ganache run.
+To deploy locally on Ganache.
 
 ```bash
 npm run deploy-dev
 ```
 
-To run a script locally run.
+To run locally a script.
 
 ```bash
 npm run script-dev
 ```
 
-To run tests locally run.
+To run some tests locally.
 
 ```bash
 npm run test-dev
@@ -128,12 +129,6 @@ To run a script that interacts with Ropsten run.
 
 ```bash
 npm run script-net
-```
-
-To run tests on remote Smart Contracts run.
-
-```bash
-npm run test-net
 ```
 
 ##  Development Rules
