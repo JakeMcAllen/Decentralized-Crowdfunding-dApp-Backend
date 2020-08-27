@@ -1,0 +1,21 @@
+[
+    {
+      "name": "Project A",
+      "description": "Fun project!",
+      "durationInDays": "3",
+      "amountToRaise": "1000000"
+    },
+    {
+        "name": "Project B",
+        "description": "Awful project!",
+        "durationInDays": "7",
+        "amountToRaise": "2500"
+    },
+    {
+        "name": "Project C",
+        "description": "Cute project!",
+        "durationInDays": "15",
+        "amountToRaise": "90000"
+    }
+]
+  
