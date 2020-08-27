@@ -1,14 +1,12 @@
 require('dotenv').config()
 const Web3 = require('web3')
-// Import Open Zeppelin test utils.
-const { expectRevert, constants } = require('@openzeppelin/test-helpers')
 // Import our test utilities.
 const testUtils = require('./utils')
-// Import Chai should interface.
-const { expect, should } = require('chai')
+// Import Chai expect interface.
+const { expect } = require('chai')
 
 // Crowdfunding contract tests.
-contract('Crowdfunding', (accounts) => {
+contract('Crowdfunding', () => {
   before(async function () {
     // Initialize test utilities class.
     await testUtils.init()
@@ -23,7 +21,7 @@ contract('Crowdfunding', (accounts) => {
   describe('# Initialization', function () {
     it('[1] Should return an empty array of projects', async function () {
       const expectedEmptyArray = await this.crowdfundingInstance.methods.getAllProjects().call({
-        from: testUtils._accounts.crowdfundingDeployer,
+        from: testUtils.getAccounts().crowdfundingDeployer,
       })
 
       expect(expectedEmptyArray).to.be.empty
@@ -46,13 +44,13 @@ contract('Crowdfunding', (accounts) => {
         amountToRaise,
       ).send({
         ...this.transactionParameters,
-        from: testUtils._accounts.starterProjectA,
+        from: testUtils.getAccounts().founderProjectA,
       })
 
       // Check Project SC instance.
       const projectAddress = transactionReceipt.events.ProjectStarted.returnValues.projectAddress
       const expectedProjectsArray = await this.crowdfundingInstance.methods.getAllProjects().call({
-        from: testUtils._accounts.crowdfundingDeployer,
+        from: testUtils.getAccounts().crowdfundingDeployer,
       })
 
       // Checks.
