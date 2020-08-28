@@ -30,8 +30,8 @@ async function main () {
       mockedProject.amountToRaise,
     ).send({
       ...this.transactionParameters,
-      // from: (await web3.eth.getAccounts())[0], // Uncomment to deploy from the same account!
-      from: (await web3.eth.getAccounts())[i + 1], // from account 1 to 3.
+      from: (await web3.eth.getAccounts())[0], // Uncomment to deploy from the same account!
+      // from: (await web3.eth.getAccounts())[i + 1], // Uncomment to deploy from account 1 to 3.
     })
 
     // Get Project contract schema to retrieve associated instance with address and show it.

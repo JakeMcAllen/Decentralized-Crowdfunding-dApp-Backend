@@ -58,7 +58,7 @@ class SharedUtils {
       data: this._crowdfunding.getBytecode(),
     }).send({
       ...this._transactionParameters,
-      from: this.accounts[0]
+      from: this.accounts[0],
     })
   }
 

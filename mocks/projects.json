@@ -1,9 +1,9 @@
 [
     {
-      "name": "Project A",
-      "description": "Fun project!",
-      "durationInDays": "3",
-      "amountToRaise": "1000000"
+        "name": "Project A",
+        "description": "Fun project!",
+        "durationInDays": "3",
+        "amountToRaise": "1000000"
     },
     {
         "name": "Project B",
@@ -18,4 +18,3 @@
         "amountToRaise": "90000"
     }
 ]
-  
