@@ -8,7 +8,7 @@ async function main () {
   if (!web3) {
     throw Error('Something went wrong with the web3 provider. Did you have run the command using truffle exec?')
   }
-  
+
   // Your script code here.
   console.log(web3.version)
 }

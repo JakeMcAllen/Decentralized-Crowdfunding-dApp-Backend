@@ -6,21 +6,21 @@ const SharedUtils = require('../shared/utils')
 const { expect } = require('chai')
 
 contract('MyContract', () => {
-    before(async function () {
-        // Initialize utilities class.
-        await SharedUtils.init(web3)
-        
-        // Get the default transaction parameters.
-        this.transactionParameters = SharedUtils.getTransactionParameters()
+  before(async function () {
+    // Initialize utilities class.
+    await SharedUtils.init(web3)
+
+    // Get the default transaction parameters.
+    this.transactionParameters = SharedUtils.getTransactionParameters()
+  })
+  describe('# Phase / Chronological Step', function () {
+    it('[1] Should test something from your contract!', async function () {
+      // Example.
+      // const myValue = 10
+      // const expectedValue = await myContract.methods.getValue().call({
+      //                          from: SharedUtils.getAccounts()[0],
+      //                       })
+      // expect(expectedValue).to.be.equal(myValue)
     })
-    describe('# Phase / Chronological Step', function () {
-        it('[1] Should test something from your contract!', async function () {
-            // Example.
-            // const myValue = 10
-            // const expectedValue = await myContract.methods.getValue().call({
-            //                          from: SharedUtils.getAccounts()[0],
-            //                       })
-            // expect(expectedValue).to.be.equal(myValue)
-        })
-    })
+  })
 })
