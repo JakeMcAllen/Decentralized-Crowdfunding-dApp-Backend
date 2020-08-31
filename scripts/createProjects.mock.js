@@ -14,9 +14,12 @@ async function main () {
   this.transactionParameters = SharedUtils.getTransactionParameters()
 
   // Get a new Crowdfunding SC instance.
+  console.log(`\n${colors.white('Deploying Crowdfunding SC...')}`)
   this.crowdfundingInstance = await SharedUtils.createNewCrowdfundingInstance()
   console.log(`\n${colors.green('Crowdfunding SC Address')} -> (${colors.magenta(this.crowdfundingInstance._address)})`)
   console.log(`\n${colors.white('-------------------------------------------------------------------')}`)
+
+  console.log(`\n${colors.white('Deploying Project SCs...')}`)
 
   // Create a new Project for each mocked project data.
   for (let i = 0; i < mockedProjects.length; i++) {
@@ -44,7 +47,7 @@ async function main () {
     console.log(`\n${colors.blue('Goal')}: "${colors.yellow(mockedProject.amountToRaise)}"`)
     console.log(`\n${colors.white('-------------------------------------------------------------------')}`)
   }
-  console.log(`\n${colors.red('Everything is fine.')}`)
+  console.log(`\n${colors.green('Everything is fine.')}`)
 
   return true
 }
