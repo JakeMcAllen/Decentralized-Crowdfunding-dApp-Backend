@@ -10,7 +10,7 @@
     "script-dev": "truffle exec scripts/createProjects.mock.js --network development",
     "script-net": "truffle exec scripts/createProjects.mock.js --network ropsten",
     "test": "truffle test --network development",
-    "lint-js": "eslint ./scripts ./shared ./test ./migrations --fix",
+    "lint-js": "npx eslint . --ext .js,.ts --fix",
     "lint-sol": "solhint ./contracts/* --fix"
   },
   "repository": {
