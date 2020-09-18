@@ -127,4 +127,36 @@ contract Project {
         // Pay the project founder.
         require(founder.send(amountToPay), "founder-not-paid");
     }
+
+    /** @notice Return every Project field data.
+      * @return _name The name of the Project.
+      * @return _description The description of the Project.
+      * @return _amountGoal The amount to reach for the Project.
+      * @return _deadline The expiration date for the funding process of the Project.
+      * @return _completeAt The completion date when the funding process ends.
+      * @return _raisedFunds The amount raised for the Project.
+      * @return _founder The founder of the Project.
+      * @return _status The status of the Project.
+      */
+    function getAllProjectData() external view returns(
+        string memory _name,
+        string memory _description,
+        uint _amountGoal,
+        uint _deadline,
+        uint _completeAt,
+        uint256 _raisedFunds,
+        address _founder,
+        STATUS _status
+    ){
+        return (
+            name,
+            description,
+            amountGoal,
+            deadline,
+            completeAt,
+            raisedFunds,
+            founder,
+            status
+        );
+    }
 }
