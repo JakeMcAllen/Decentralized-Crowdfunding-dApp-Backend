@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A starter boilerplate for an Ethereum backend using Truffle, Infura, OpenZeppelin Contracts, Chai and, Ganache.",
   "scripts": {
-    "ganache": "ganache-cli -a \"$(grep ACCOUNT_NUMBER .env | cut -d '=' -f2)\" -d -m \"$(grep DEV_MNEMONIC .env | cut -d '=' -f2)\"",
+    "ganache": "ganache-cli -i 123456 -a \"$(grep ACCOUNT_NUMBER .env | cut -d '=' -f2)\" -d -m \"$(grep DEV_MNEMONIC .env | cut -d '=' -f2)\"",
     "compile": "rm -fr build && solhint ./contracts/* --fix && truffle compile",
     "deploy-dev": "truffle deploy --network development",
     "deploy-net": "truffle deploy --network ropsten",
@@ -37,7 +37,7 @@
     "eslint-plugin-standard": "^4.0.1",
     "ganache-cli": "^6.10.1",
     "solhint": "^3.2.0",
-    "truffle": "^5.1.41"
+    "truffle": "^5.1.44"
   },
   "dependencies": {
     "@openzeppelin/contracts": "^3.1.0",
