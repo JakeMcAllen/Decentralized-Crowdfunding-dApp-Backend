@@ -1,10 +1,15 @@
 require('dotenv').config()
 require('web3')
+
 const colors = require('colors')
 const SharedUtils = require('../shared/utils')
 
-// Get all mocked projects.
-const mockedProjects = require('../mocks/projects.json')
+// library for define Telegram bot directive
+const TelegramBot = require('node-telegram-bot-api')
+const token = '1673700261:AAF_fWmmmiCZwnZuH6zhEAyyEZrBTBjnV-o'
+const bot = new TelegramBot(token, {polling: true})
+
+
 
 async function main () {
   // Initialize test utilities class.
@@ -32,15 +37,6 @@ async function main () {
     		from: (await web3.eth.getAccounts())[0],
   	})
         
-  	const trsct1Address = trsct1.events.ppT.returnValues
-
-	console.log('val: ' + val);
-  	console.log(`${colors.green('Data get from blockchain')} -> (${colors.magenta(trsct1Address)})`)
-	console.log(`${colors.green('Data get from blockchain')} -> (${colors.magenta(trsct1Address.cross)})`)
-	console.log(`${colors.green('Data get from blockchain')} -> (${colors.magenta(trsct1Address.pp)})`)
-	console.log(`${colors.white('-------------------------------------------------------------------')}\n`)
-
-
 	console.log('val: ' + val);
 	val++;
   }	
@@ -55,22 +51,66 @@ async function main () {
     from: (await web3.eth.getAccounts())[0],
   })
 
+    const trsct2Address = trsct2.events.crtIDRtrn.returnValues.currentID
 
-  const trsct2Address = trsct2.events.pricePrediction.returnValues
+        console.log(`\n${colors.green('Data get from blockchain')} -> (${colors.magenta(trsct2Address)})`)
 
-  console.log(`\n${colors.green('Data get from blockchain')} -> (${colors.magenta(trsct2Address.pp)})`)
 
   return true
 }
 
-// Required by `truffle exec`
-module.exports = function (callback) {
-  return new Promise((resolve, reject) => {
-    main()
-      .then((value) => resolve(value))
-      .catch(err => {
-        console.log('Error:', err)
-        reject(err)
-      })
-  })
-}
+
+
+
+// bot.start((cxt) => { ctx.reply('Benvenuto nel traderBot!') })  // context.reply('Servizio ECHO avviato')
+
+// bot.help((ctx) => { ctx.reply('help message'); })
+
+bot.onText(/\/ciao/, (ctx, match) => { bot.sendMessage(ctx.chat.id, 'ciao'); })
+
+bot.onText(/\/set/, (ctx, match) => { 
+
+
+})
+
+
+bot.onText(/\/get/, (ctx, match) => {
+	
+	console.log('0');
+
+
+	// Required by `truffle exec`
+
+  	   return new Promise((resolve, reject) => {
+             main()
+             .then((value) => resolve(value))
+             .catch(err => {
+        	console.log('Error:', err)
+        	reject(err)
+             })
+  	   })
+
+/*
+	     main()
+             .then((value) => resolve(value))
+             .catch(err => {
+        	console.log('Error:', err)
+        	reject(err)
+             })
+
+*/
+	console.log('1' + addPrice());
+
+})
+
+
+console.log(`\n${colors.green('Everything is fine.')}`)
+
+
+
+
+
+
+
+
+

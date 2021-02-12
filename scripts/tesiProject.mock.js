@@ -6,6 +6,15 @@ const SharedUtils = require('../shared/utils')
 // Get all mocked projects.
 const mockedProjects = require('../mocks/projects.json')
 
+
+
+// library for define Telegram bot directive
+const TelegramBot = require('node-telegram-bot-api')
+const token = '1515680414:AAEVqXyNtzTs30H16cB_eZh1dtv0d3v4ESQ'
+const bot = new TelegramBot(token, {polling: true})
+
+
+
 async function main () {
   // Initialize test utilities class.
   await SharedUtils.init(web3)
@@ -21,29 +30,20 @@ async function main () {
 
   console.log(`\n${colors.green('Everything is fine.')}`)
 
-  let val = 3;
-
-  for (let i=0; i < 10; i++) {
-	const trsct1 = await this.crowdfundingInstance.methods.addPrice(
-    		"eurusd", 
-    		val
-  	).send({
-  		...this.transactionParameters,
-    		from: (await web3.eth.getAccounts())[0],
-  	})
-        
-  	const trsct1Address = trsct1.events.ppT.returnValues
-
-	console.log('val: ' + val);
-  	console.log(`${colors.green('Data get from blockchain')} -> (${colors.magenta(trsct1Address)})`)
-	console.log(`${colors.green('Data get from blockchain')} -> (${colors.magenta(trsct1Address.cross)})`)
-	console.log(`${colors.green('Data get from blockchain')} -> (${colors.magenta(trsct1Address.pp)})`)
-	console.log(`${colors.white('-------------------------------------------------------------------')}\n`)
+  const max = 100;
+  const min = 0;
+  let val = Math.random() * (max - min) + min;
 
 
-	console.log('val: ' + val);
-	val++;
-  }	
+  trsct1 = await this.crowdfundingInstance.methods.addPrice(
+    	"eurusd", 
+    	val
+  ).send({
+  	...this.transactionParameters,
+  	from: (await web3.eth.getAccounts())[0],
+  })
+  
+
 
   console.log(`\n\n\n${colors.green('Data send to blockchain: ')}` + val);
 
@@ -55,13 +55,19 @@ async function main () {
     from: (await web3.eth.getAccounts())[0],
   })
 
+  const trsct2Address = trsct2.events.pricePrediction.returnValues.pp
 
-  const trsct2Address = trsct2.events.pricePrediction.returnValues
+  console.log(`\n${colors.green('Data get from blockchain')} -> (${colors.magenta(trsct2Address)})`)
 
-  console.log(`\n${colors.green('Data get from blockchain')} -> (${colors.magenta(trsct2Address.pp)})`)
+
+  bot.onText(/\/get val/, (msg) => {
+  	bot.sendMessage(msg.chat.id, trsct2Address);
+  });
 
   return true
 }
+
+console.log("in")
 
 // Required by `truffle exec`
 module.exports = function (callback) {

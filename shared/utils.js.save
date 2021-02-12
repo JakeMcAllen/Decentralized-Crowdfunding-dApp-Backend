@@ -1,6 +1,6 @@
 require('dotenv').config()
 // Import contract JSON compilation data.
-const criptovalue = require('../build/contracts/criptovalue.json')
+const Crowdfunding = require('../build/contracts/Crowdfunding.json')
 const Project = require('../build/contracts/Project.json')
 
 // An utility class used to reduce test code duplications and errors.
@@ -41,7 +41,7 @@ class SharedUtils {
 
     // Smart Contract class instance for Crowdfunding and Project contracts.
     // (NB. these are not SC instances but you can instance one or more SC from these).
-    this._crowdfunding = new SmartContract('criptovalue', criptovalue)
+    this._crowdfunding = new SmartContract('Crowdfunding', Crowdfunding)
     this._project = new SmartContract('Project', Project)
   }
 
