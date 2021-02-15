@@ -37,8 +37,7 @@ contract criptovalue {
     // add a new price predected into blockchain
     function addPrice(
        string memory cross, 
-       uint pp, 
-       
+       uint pp
     ) external {
         _fileData[_currentID] = ppTransaction(msg.sender, _currentID, cross, pp, block.timestamp);
         _userFiles[msg.sender].push(_fileData[_currentID]);
