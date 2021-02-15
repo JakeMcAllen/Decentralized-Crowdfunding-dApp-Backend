@@ -28,12 +28,11 @@ async function main () {
   console.log(`\n${colors.green('Crowdfunding SC Address')} -> (${colors.magenta(this.crowdfundingInstance._address)})`)
   console.log(`\n${colors.white('-------------------------------------------------------------------')}`)
 
-  console.log(`\n${colors.green('Everything is fine.')}`)
+
 
   const max = 100;
   const min = 0;
-  let val = Math.random() * (max - min) + min;
-
+  let val = (Math.random() * (max - min) + min).toFixed(0);
 
   trsct1 = await this.crowdfundingInstance.methods.addPrice(
     	"eurusd", 
@@ -42,7 +41,7 @@ async function main () {
   	...this.transactionParameters,
   	from: (await web3.eth.getAccounts())[0],
   })
-  
+  console.log(`\n${colors.green('Everything is fine.')}`)
 
 
   console.log(`\n\n\n${colors.green('Data send to blockchain: ')}` + val);
@@ -60,7 +59,7 @@ async function main () {
   console.log(`\n${colors.green('Data get from blockchain')} -> (${colors.magenta(trsct2Address)})`)
 
 
-  bot.onText(/\/get val/, (msg) => {
+  bot.onText(/\/get/, (msg) => {
   	bot.sendMessage(msg.chat.id, trsct2Address);
   });
 

@@ -1,8 +1,8 @@
 0 info it worked if it ends with ok
-1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'run', 'deploy-dev' ]
+1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'run', 'ganache' ]
 2 info using npm@3.5.2
 3 info using node@v8.10.0
-4 verbose stack Error: missing script: deploy-dev
+4 verbose stack Error: missing script: ganache
 4 verbose stack     at run (/usr/share/npm/lib/run-script.js:147:19)
 4 verbose stack     at /usr/share/npm/lib/run-script.js:57:5
 4 verbose stack     at /usr/share/npm/node_modules/read-package-json/read-json.js:345:5
@@ -14,10 +14,10 @@
 4 verbose stack     at FSReqWrap.readFileAfterOpen [as oncomplete] (fs.js:420:13)
 5 verbose cwd /home/giorgio/Ethereum-Backend-Boilerplate/scripts
 6 error Linux 5.4.0-65-generic
-7 error argv "/usr/bin/node" "/usr/bin/npm" "run" "deploy-dev"
+7 error argv "/usr/bin/node" "/usr/bin/npm" "run" "ganache"
 8 error node v8.10.0
 9 error npm  v3.5.2
-10 error missing script: deploy-dev
+10 error missing script: ganache
 11 error If you need help, you may report this error at:
 11 error     <https://github.com/npm/npm/issues>
 12 verbose exit [ 1, true ]
